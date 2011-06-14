@@ -167,7 +167,7 @@ class SSHLogTailer(object):
                         lasthostnameChanged = hostname
                 time.sleep(1)
         except:
-            print "\nfinishing ..."
+            print "\nfinishing ...", sys.exc_info()[0]
             for hostname in self.hostnames.keys():
                 sshChannel = self.hostnameChannels[hostname]['channel']
                 sshclient = self.hostnameChannels[hostname]['client']

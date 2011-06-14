@@ -1,0 +1,46 @@
+Metadata-Version: 1.0
+Name: log4tailer
+Version: 3.0.2
+Summary: Not just a simple log tailer
+Home-page: http://bitbucket.org/jordilin/alerta/wiki/Home
+Author: Jordi Carrillo
+Author-email: jordilin@gmail.com
+License: GNU GPL v3
+Download-URL: http://bitbucket.org/jordilin/alerta/downloads
+Description: 
+        Introduction
+        ============
+        This project aims to provide a different approach to traditional log tailers.
+        Amongst other features:
+        
+        * Multitailing capability. It can tail multiple logs at a time
+        * Colors for every level: warn, info, debug, error and fatal
+        * Emphasize multiple targets (log traces) given regular expressions
+        * Follow log upon truncation by default
+        * User defined colors for each level
+        * Silent (daemonized) mode
+        * Throttling mode. Slow down the information being printed in the terminal
+        * Inactivity log monitoring
+        * mail notification
+        * Pause Modes freezes output for a limited period of time depending on level found.
+        * Analytics. Makes a report of each level found in logs when finished. 
+        
+        Why yet another tailer?
+        =======================
+        Most people use tail -F to tail the logs these days. When debugging enterprise
+        class applications you cannot just follow (in many situations) what is going on
+        unless you go to the log, less it and check if something was wrong, or just
+        Ctrl-C tail program and scroll back. Human eye cannot distinguish or grab a
+        line out of thousands when that information is showed incredibly fast in the
+        screen. By providing colors, the human eye will discern and quickly identify
+        specific levels or lines. 
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Topic :: System :: Monitoring

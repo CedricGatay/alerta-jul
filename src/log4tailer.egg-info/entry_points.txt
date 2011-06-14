@@ -1,0 +1,3 @@
+[console_scripts]
+log4tail = log4tailer.log4tail:main
+

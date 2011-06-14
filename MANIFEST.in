@@ -1,0 +1,10 @@
+include bin/log4tail
+include log4tailer.1
+include buildout.cfg
+include buildout24.cfg
+include bootstrap.py
+include ChangeLog
+include COPYING
+include Makefile
+include log4tailerconfig.txt
+graft tests

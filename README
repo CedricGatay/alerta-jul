@@ -1,0 +1,87 @@
+# Log4Tailer: A multicolored python tailer for log4J logs
+# Copyright (C) 2008 Jordi Carrillo Bosch
+
+# This file is part of Log4Tailer Project.
+#
+# Log4Tailer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Log4Tailer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Log4Tailer.  If not, see <http://www.gnu.org/licenses/>.
+
+*********************************************
+Basic functionality
+*********************************************
+
+This a quick setup to get you up and running. Please refer to the 
+documentation provided in the log4tailer project webpage at googlecode: 
+http://code.google.com/p/log4tailer/
+
+Installation:
+
+Untar, cd bin and run :-)
+
+If you want system wide:
+
+python setup.py install
+
+Options:
+
+Normal functionality:
+
+log4tail pathToLogs 
+
+will tail the logs with colors. 
+
+log4tail -t "regex" pathToLogs
+
+will tail the logs with colors and will emphasize the line that complies with the regex 
+
+Throttling:
+
+log4tail --throttle secs pathToLogs
+
+It will slow down the tailing if your application logs very fast
+
+Silent Mode:
+
+log4tail -s -c configfile fullpathToLogs
+
+Silent Mode activates SMTP email action and alerts will be sent to 
+the address specified. Log4Tailer will request for the SMTP options 
+interactively.
+Silent Mode basically daemonizes Log4Tailer monitoring the logs. In
+case of a FATAL will send the log trace to the address specified.
+You must provide the full path to the logs.
+
+Color config parameters:
+
+You can specify your own colors by providing the -c parameter
+
+log4tail -c config.txt pathToLogs
+
+where config.txt, you can specify:
+
+warn = yellow
+info = green
+debug = black
+error = magenta
+fatal = red
+
+The above are the defaults and work well with a white or clear terminal background.
+
+Other options, please refer to the wiki in the project webpage.
+
+For more explanation, details and options take a look at the UserGuide
+provided.
+
+Enjoy
+
+Jordi

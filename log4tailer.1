@@ -1,0 +1,87 @@
+.TH LOG4TAILER 1 "July 2010" "Version 2.71" "User Manuals"
+.SH NAME
+Log4Tailer \- Log monitoring application
+.SH SYNOPSIS
+.B log4tail
+.BI "[ options ] " fullpathtolog0, ..., fullpathtologN-1
+
+.B log4tail
+.BI "{{ \-c | \-\-config } " path_to_configfile
+.BI "| \-\-throttle " time
+.BI "| {\-s | \-\-silence } "
+.BI "| {\-t | \-\-target} " regex 
+.BI "| {\-i | \-\-inact} " time 
+.BI "| \-\-no-mail-silence" 
+.BI "| \-n " number 
+
+.SH DESCRIPTION
+.B log4tailer
+is a program written in
+.BR python (1) 
+that aims to provide a different approach to traditional log tailers.
+Amongst other features:
+
+.IP 1.
+Multitailing capability. It can tail multiple logs at a time
+.IP 2.
+Colors for every level: warn, info, debug, error and fatal
+.IP 3.
+Emphasize multiple targets (log traces) given regular expressions
+.IP 4.
+Follow log upon truncation by default
+.IP 5.
+User defined colors for each level
+.IP 6.
+Silent (daemonized) mode
+.IP 7.
+Throttling mode. Slow down the information being printed in the terminal
+.IP 8.
+Inactivity log monitoring
+.IP 9.
+mail notification
+.IP 10.
+Pause Modes freezes output for a limited period of time depending on level found.
+.IP 11.
+Analytics. Makes a report of each level found in logs when finished. 
+
+This man page is a quick reference to the main log4tailer options. If you want 
+a more concise explanation, then you may want to check out the UserGuide provided in google code at 
+.IR http://code.google.com/p/log4tailer/ .
+
+.SH OPTIONS
+.TP
+.BI "\-c, \-\-configuration file " path_to_configuration_file
+Path to the configuration file. It should provide some optional parameters.
+.TP
+.B \-m, \-\-mail
+Mail notification. It tails the log and notifies if a CRITICAL, FATAL, ERROR or 
+any targets (regexes) you might have specified in a configuration file.
+.TP
+.BI "\-\-cornermark " N
+Visual bar notification when a CRITICAL, FATAL or ERROR has been found. It will 
+be displayed by the number of seconds N given.
+.TP
+.BI "\-n " N
+Tails the last N lines from the log file.
+.TP
+.BI "\-i, \-\-inact " N
+Inactivity notification. Notifies to STDOUT when there has not been any
+activity in the log for N seconds.
+.TP
+.BI "\-\-throttle " time_in_seconds
+Slows down the tailing in STDOUT by tailing every time_in_seconds at a time.
+.TP
+.BI "\-r, \-\-remote " 
+Tails logs in remote servers by mean of SSH. You should specify a configuration file as well.
+
+.SH AUTHOR
+Jordi Carrillo <jordilin at gmail dot com>
+.PP
+Feel free to ask me questions or send me bug reports, but you may want to see the web page, mentioned below, first.
+
+.SH SEE ALSO
+.BR python (1),
+.BR tail (1).
+The main log4tailer web page is at
+.IR http://code.google.com/p/log4tailer/ .
+

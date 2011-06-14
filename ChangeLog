@@ -1,0 +1,252 @@
+====================================
+07/05/11 release 3.0.2
+====================================
+- Fixes the username was not being passed to the ssh connect call. Bug number 3
+in bitbucket.
+- Minor cleanups
+
+====================================
+7/11/10 release 3.0.1
+====================================
+- Updated documentation. The project is hosted
+now in bitbucket under the name of Alerta
+- Provided new logo for the project.
+
+====================================
+28/10/10 release 3.0
+====================================
+- Updated documentation for log4server
+- Fixed regexes properties in config file
+
+====================================
+16/10/10 release 2.9
+====================================
+- minor refactoring
+- Poster notification to allow communication with 
+a centralized web app.
+- Fix issue 11 SSHTailing failed due to only accepts print 
+notification.
+- PrintShot notification
+
+====================================
+24/06/10 release 2.8
+====================================
+- Man page for log4tailer
+- Refactored to allow more automated tests 
+to be performed and avoid manual testing as 
+much as possible.
+- Inactivities in logs reported at the end 
+of execution.
+- Updated documentation for executor 
+notification
+- Some minor fixes/clean ups for 
+the documentation
+
+====================================
+03/07/10 release 2.7
+====================================
+- Executor notification
+- throttle one line at a time not consuming 
+whole log in each iteration.
+- setuptools fix
+- option to show the log4tailer's version
+provided
+- updated documentation
+
+====================================
+26/06/10 release 2.6
+====================================
+- "warning" keyword level included. Some 
+apps log "warning" instead of "warn".
+- filter notifications implemented
+- actions refactored into notifications 
+- pausemode refactored into modes
+- analytics notification to a file
+- cornermark notification 
+- nomailsilence option provided, enabling 
+silence mode with no notification predefined.
+- Mail notification provides SSL and 
+from now on the details will be specified in 
+a configuration file. Password will be introduced 
+during runtime to avoid leaving it in plain ascii 
+format.
+- test_suite param removed from setup. Nosetests 
+can be run on their own, with nosetests command line 
+tool.
+- updated documentation
+
+====================================
+01/05/10 release 2.4
+====================================
+- Nosetests integrated in setup
+- Improved unit tests
+- Config file if not provided will try
+to find it in $HOME/.log4tailer, as suggested
+by Carlo Bertoldi 
+- Better regex avoiding false positives when 
+log level in a word as suggested by 
+Carlo Bertoldi
+- Configurable background color
+- each target with its own set of colors
+- Some bug fixes
+- Updated documentation
+
+====================================
+24/01/10 release 2.2
+====================================
+- bug fix in pipeOut method in LogTailer 
+was breaking interface in Actions
+- cleaned and provided more unit tests
+- testtools being used sometimes, which provides 
+extended methods to unittest
+- SSH tailing tries to authenticate using 
+rsa key first
+
+====================================
+17/10/09 release 2.0
+====================================
+- Added additional level: Critical
+- Fixed tail last n lines and documented
+- Fixed tail when log was empty it crashed
+- Fixed date in emailaction as specified in RFC 2822
+- Added logging in debug
+- Added remote tailing over SSH (SSH tailing)
+- updated documentation
+
+====================================
+05/09/09 release 1.50
+====================================
+- Every log can have its own set of 
+targets if specified in config file
+- InactivityAction can notify by email 
+if specified in config file.
+- Fixed behaviour in the Timer. If there 
+were undesirable effects during gapnotification 
+time, it restarted the Timer, hence not 
+notifying after gaptime.
+- Properties class if not found key, 
+does not throw exception, returns None 
+for convenience.
+- Targets are now reported in the final 
+report
+- Provided config file for convenience
+- Report can be sent by email at 
+any given time provided in config
+- Every log has its own timers in order 
+to monitor them separately when mail action 
+is set up.
+- Updated documentation
+
+
+====================================
+06/08/09 release 1.45 
+====================================
+
+- tails from stdin
+- Mail action for errors and fatals along 
+with targets. This is actioned in either 
+mail action with -m or silent action with -s
+- Every log can have its own color if 
+specified in configfile
+
+
+====================================
+06/07/09 release 1.42 
+====================================
+- For Errors and Fatals the log trace 
+is included in the final report along with 
+the datestamp.
+- Final report now reports separately for each log  
+- Updated Documentation
+
+
+====================================
+19/05/09 release 1.4 
+====================================
+- Better regex for ColorParser, which 
+fixes definitely the fact of having for 
+instance the "error" and "warn" string 
+in same log trace. First to appear, the 
+one that takes preference.
+
+- Updated doc, at least you need Python 
+2.4
+
+- Information included in setup.py to 
+include log4tailer in Pypi site.
+
+- Silent mode is for Fatal level only. 
+Documentation has been updated.
+
+====================================
+17/05/09 release 1.3 
+====================================
+- Bug fixes numbers: 4,5,6
+- New feature: Analytics
+- Date was missing in mail action
+Fixed.
+
+====================================
+release 1.2
+====================================
+- New feature: PauseModes. For each 
+level it will pause the tailing. 
+debug and info no pause by default
+warn 1 seconds
+error 3 seconds
+fatal and targets 5 seconds
+
+- At very beginning (first tail) that 
+tails last 10 lines in logs, only 
+printAction is available with no 
+PauseModes.
+
+- Bug fixes in mail Action. There 
+were some things not working 
+properly yet. 
+
+- Tests provided in distribution.
+python setup.py test 
+
+- More automated commands - clean, 
+release, test, compile docs
+
+- Bug fix number 3 about making
+keys in config case insensitive
+
+====================================
+release 1.1 
+====================================
+- Provides installation (distutils)
+- Emulates the same behaviour as tail 
+command when printing the log headers while
+tailing
+
+====================================
+release 1.0
+====================================
+- Multiple targets
+- Multiple actions can be triggered 
+while tailing (defaults to print)
+- tails last 10 lines at startup
+- some refactoring
+- added unit testing 
+- Inactivity Action fully supported
+- Mail Action can be used even without
+working in silence mode. Only Fatal level 
+will send a notification
+- throttle option allows decimal numbers, 
+such as 0.n 
+
+====================================
+release v06 March 09
+====================================
+- Option target available again
+after a bug fix in v05
+
+====================================
+release v05 March 09
+====================================
+- Option throttle provided
+- Major refactoring for maintenability and scalability
+- fixed bug, could not parse config file

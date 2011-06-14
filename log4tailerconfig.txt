@@ -1,0 +1,113 @@
+# Optional config for log4tailer
+# to activate it
+# log4tail -c config yourlogs
+
+# ====================================================
+# Custom colours for every level. Available 
+# colours are: red, green, yellow, blue, magenta, cyan 
+# and white. Uncomment to override the default ones.
+# ====================================================
+
+# warn = yellow, on_cyan
+# error = magenta 
+# fatal = red, on_green
+# info = green
+# debug = black
+
+# ================================
+# targets: which lines do you want 
+# to emphasize by using regexes
+# uncomment and provide your values.
+# ================================
+
+# targets fullpathToLog0 = regex0 : color0; regex1 : color1;..; regexN : colorN
+# targets fullpathToLog1 = regex0 : color0; regex1 : color1;..; regexN : colorN
+
+# ======================================================
+# Every log with its own color scheme, overriding colors 
+# for every level.
+# ======================================================
+
+# /path/to/log0 = yellow
+# /path/to/log1 = red
+
+# ======================================================
+# Pause the output by the number of seconds specified if 
+# a level or target has been found. Uncomment the ones 
+# you want. The value can be any number in seconds. 
+# ======================================================
+
+# pausedebug = 4
+# pauseinfo = 2
+# pausewarn = 1
+# pauseerror = 1
+# pausefatal = 1
+# pausetarget = 1
+
+# ======================================================
+# Mail details 
+# ======================================================
+
+# mail_username = yourhostusername
+# mail_hostname = mailhostname
+# mail_port = 25
+# mail_ssl = True or False
+# mail_from = any from address
+# mail_to = alerts will be sent in the address you specify in here
+
+# ===================================================================
+# executor notification
+# ===================================================================
+
+# executor = program command1 command2 %s %s
+# executor = program command1 command2 
+
+# ===================================================================
+# poster notification
+# ===================================================================
+
+# server_url = url to the server
+# server_port = port
+# server_service_uri = /where/go/notifications
+# server_service_register_uri = /register/log4tailer/toserver
+# server_service_unregister_uri = /unregister/log4tailer/fromserver
+
+# ===================================================================
+# Inactivity notification, by email or stdout.
+# Possible values can be "mail" or "print". By default is "print".
+# ===================================================================
+
+# inactivitynotification = mail
+
+# ===================================================================
+# PrintShot notification
+# ===================================================================
+
+# screenshot = fullpathtopicture.png
+
+# ====================================================================
+# Analytics notification. You can make log4tailer send you 
+# a report every analyticsgaptime seconds. By default it will be 
+# printed out once finished. Uncomment analyticsnotification to 
+# report by email or to a file. Another possible value can be "print".
+# ====================================================================
+
+# analyticsnotification = mail
+# analyticsnotification = fullPathToaFile
+# analyticsgaptime = 10.5
+
+# ==============================
+# SSH Tailing parameters
+# ==============================
+
+# sshhostnames = hostname0, hostname1, hostnameN-1
+# hostname0 = username0, /var/log/log0, /var/log/log1, /var/log/logN-1
+# hostname1 = username1, /var/log/log0, /var/log/log1, /var/log/logN-1
+# hostnameN-1 = usernameN-1, /var/log/log0, /var/log/log1, /var/log/logN-1
+
+# rsa_key defaults to ~/.ssh/id_rsa, if that's not your case then 
+# provide yours
+
+# rsa_key = fullpathToRsaKeyName 
+
+

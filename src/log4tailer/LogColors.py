@@ -34,7 +34,9 @@ class LogColors(object):
         self.error = self.color.magenta
         self.info = self.color.green
         self.fine = self.color.green
+        self.finer = self.color.green
         self.debug = self.color.black
+        self.config = self.color.black
         self.finest = self.color.black
         self.fatal = self.color.red
         self.severe = self.color.red

@@ -29,7 +29,6 @@ class ColorParser(object):
     def __init__(self, loglevels):
         # Not greedy matching to match from the end of string
         regex = ".*(" + "|".join(loglevels.logLevels) +")"
-        print regex
         self.all = re.compile(regex, re.I)
 
     def parse(self, line):

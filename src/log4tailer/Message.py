@@ -19,6 +19,7 @@
 from log4tailer.ColorParser import ColorParser
 from log4tailer import modes
 import re
+from log4tailer.TermColorCodes import SKIP
 
 class Message(object):
     '''the message to be actioned
@@ -94,9 +95,14 @@ class Message(object):
             levelcolor = self.oldLevelColor
 
         if self.logOwnColor:
-            return (pause, self.color.getLogColor(self.logOwnColor)
+            color = self.color.getLogColor(self.logOwnColor)
+            if color is SKIP:
+                return (0, None)
+            return (pause, color
                     + self.plainMessage + self.color.reset)
         elif levelcolor:
+            if levelcolor is SKIP:
+                return (0, None)
             return (pause, levelcolor + self.plainMessage + self.color.reset)
         else:
             return (pause, self.plainMessage)

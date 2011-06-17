@@ -52,6 +52,7 @@ HIGHLIGHTS = dict(
 
 SUFFIX_CODE ='\033[%dm'
 RESET = '\033[0m'
+SKIP = "skip"
 
 class TermColorCodes:
     '''Defines the ANSI Terminal
@@ -75,6 +76,8 @@ class TermColorCodes:
     def getCode(self, color):
         '''Returns the color code
         provided the ascii color word'''
+        if color == SKIP:
+            return SKIP
         color = [ k.strip() for k in color.split(',') ]
         return ''.join(map(self.buildCode, color))
 

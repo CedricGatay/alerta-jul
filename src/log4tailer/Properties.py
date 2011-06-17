@@ -35,7 +35,6 @@ class Property(object):
         self.blankpat = re.compile(r'^(\s+|#.*|\/\/.*)$')
         self.validsep = ["="]
         self.resep = "|".join(self.validsep)
-        self.levelsRe = re.compile(r'^level=(.*)$')
         self.colorsRe = re.compile(r'^color\.(.*)=(.*)$')
 
     def parse_properties(self):
@@ -48,10 +47,6 @@ class Property(object):
         # Generator expression, so does not matter if huge or not actually.
         lines = (k.rstrip() for k in fd if not self.blankpat.search(k))
         for i in lines:
-            search = self.levelsRe.search(i)
-            if search:
-               self.levels.append(search.group(1).lower())
-               continue
             search = self.colorsRe.search(i)
             if search:
                 level = search.group(1).lower()
@@ -82,7 +77,7 @@ class Property(object):
         return self.keys
 
     def get_levels(self):
-        return self.levels
+        return self.colors.keys()
 
     def get_color(self, level):
         if level in self.colors.keys():

@@ -27,7 +27,7 @@ class SSHLogTailer(object):
     def __init__(self, defaults):
         self.arrayLog = []
         self.logcolors = defaults['logcolors']
-        self.logcolors = defaults['loglevels']
+        self.loglevels = defaults['loglevels']
         self.pause = defaults['pause']
         self.silence = defaults['silence']
         self.actions = notifications.Print()

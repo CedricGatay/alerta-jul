@@ -30,8 +30,7 @@ class Property(object):
         self.lines = []
         self.keys = []
         self.dictproperties = {}
-        self.colors={}
-        self.levels=[]
+        self.colors = {}
         self.blankpat = re.compile(r'^(\s+|#.*|\/\/.*)$')
         self.validsep = ["="]
         self.resep = "|".join(self.validsep)
@@ -40,29 +39,29 @@ class Property(object):
     def parse_properties(self):
         # is that a huge config file?
         try:
-            fd = open(self.propertyfile,'r')
+            fd = open(self.propertyfile, 'r')
         except:
             print "could not open property file"
             sys.exit()
-        # Generator expression, so does not matter if huge or not actually.
+            # Generator expression, so does not matter if huge or not actually.
         lines = (k.rstrip() for k in fd if not self.blankpat.search(k))
         for i in lines:
             search = self.colorsRe.search(i)
             if search:
                 level = search.group(1).lower()
-                if not level in self.levels:
-                    self.levels.append(level)
-                    print "Level " + level + " was automagically added to recognized level as a color was defined !"
+                defined_color = search.group(2).lower()
+                if level in self.colors.keys():
+                    raise KeyAlreadyExistsException("color for level " + level + " is duplicated")
 
-                self.colors[level] = search.group(2).lower()
+                self.colors[level] = defined_color
                 continue
 
-            vals = re.split(self.resep,i)
+            vals = re.split(self.resep, i)
             # we make it case insensitive.
             key = vals[0].strip().lower()
             value = vals[1].strip()
             if self.dictproperties.has_key(key):
-                raise KeyAlreadyExistsException(key+" is duplicated")
+                raise KeyAlreadyExistsException(key + " is duplicated")
             else:
                 self.dictproperties[key] = value
         fd.close()
@@ -72,7 +71,7 @@ class Property(object):
         if key in self.dictproperties:
             return self.dictproperties[key]
         return None
-    
+
     def get_keys(self):
         return self.keys
 
@@ -81,13 +80,13 @@ class Property(object):
 
     def get_color(self, level):
         if level in self.colors.keys():
-           return self.colors[level]
+            return self.colors[level]
         return None
 
     def get_color_items(self):
         return self.colors.items()
 
-    def is_key(self,key):
+    def is_key(self, key):
         if key in self.dictproperties:
             return True
         else:

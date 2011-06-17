@@ -23,7 +23,8 @@ from optparse import OptionParser
 import log4tailer
 
 def startupNotice():
-    notice = """Log4Tailer  Copyright (C) 2008 Jordi Bosch
+    notice = """Alerta Copyright (C) 2011 Cedric Gatay,
+                    forked from Log4Tailer (C) 2008 Jordi Bosch
         This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
             This is free software, and you are welcome to redistribute it
                 under certain conditions; type `show c' for details."""

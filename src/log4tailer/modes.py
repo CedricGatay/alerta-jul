@@ -31,7 +31,9 @@ class PauseMode(object):
                 'target':0}
 
     def getPause(self,level):
-        return self.defaultLevelPauses[level]
+        if level in self.defaultLevelPauses.keys():
+            return self.defaultLevelPauses[level]
+        return 0
 
     def parse_config(self,properties):
         pauseKeys = ['pausedebug','pauseinfo','pausewarn','pauseerror','pausefatal',

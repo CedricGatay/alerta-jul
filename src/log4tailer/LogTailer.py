@@ -53,6 +53,7 @@ class LogTailer(object):
     def __init__(self, defaults):
         self.arrayLog = []
         self.logcolors = defaults['logcolors']
+        self.loglevels = defaults['loglevels']
         self.pause = defaults['pause']
         self.silence = defaults['silence']
         self.actions = defaults['actions']
@@ -93,7 +94,7 @@ class LogTailer(object):
 
     def printLastNLines(self,n):
         '''tail -n numberoflines method in pager mode'''
-        message = Message(self.logcolors)
+        message = Message(self.logcolors, self.loglevels)
         action = notifications.Print()
         for log in self.arrayLog:
             fd = log.openLog()
@@ -118,7 +119,7 @@ class LogTailer(object):
     def pipeOut(self):
         """Reads from standard input 
         and prints to standard output"""
-        message = Message(self.logcolors, self.target, self.properties)
+        message = Message(self.logcolors, self.loglevels, self.target, self.properties)
         stdin = sys.stdin
         anylog = Log('anylog')
         for line in stdin:
@@ -184,7 +185,7 @@ class LogTailer(object):
 
     def tailer(self):
         '''Stdout multicolor tailer'''
-        message = Message(self.logcolors,self.target,self.properties)
+        message = Message(self.logcolors,self.loglevels, self.target,self.properties)
         resume = self.resumeBuilder()
         self.posEnd()
         get_log_lines = "readLines"

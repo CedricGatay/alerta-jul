@@ -24,7 +24,7 @@ class Message(object):
     '''the message to be actioned
     and showed being by email, stdout,...'''
 
-    def __init__(self, logcolor, target = None, properties = None):
+    def __init__(self, logcolor, loglevels, target = None, properties = None):
         self.patarget = None
         self.isTarget = None
         self.currentLogPath = None
@@ -36,7 +36,7 @@ class Message(object):
         self.color = logcolor
         self.plainMessage = None
         self.colorizedMessage = None
-        self.colorparser = ColorParser()
+        self.colorparser = ColorParser(loglevels)
         self.messageLevel = ''
         self.oldMessageLevel = ''
         self.oldLevelColor = None

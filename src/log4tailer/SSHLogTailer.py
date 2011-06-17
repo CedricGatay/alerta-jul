@@ -27,6 +27,7 @@ class SSHLogTailer(object):
     def __init__(self, defaults):
         self.arrayLog = []
         self.logcolors = defaults['logcolors']
+        self.logcolors = defaults['loglevels']
         self.pause = defaults['pause']
         self.silence = defaults['silence']
         self.actions = notifications.Print()
@@ -144,7 +145,7 @@ class SSHLogTailer(object):
 
     def tailer(self):
         '''Stdout multicolor tailer'''
-        message = Message(self.logcolors,self.target,self.properties)
+        message = Message(self.logcolors,self.loglevels, self.target,self.properties)
         anylog = Log('anylog')
         for hostname in self.hostnames.keys():
             command = self.hostnames[hostname]['command']

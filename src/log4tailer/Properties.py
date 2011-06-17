@@ -30,10 +30,14 @@ class Property(object):
         self.lines = []
         self.keys = []
         self.dictproperties = {}
+        self.colors={}
+        self.levels=[]
         self.blankpat = re.compile(r'^(\s+|#.*|\/\/.*)$')
         self.validsep = ["="]
         self.resep = "|".join(self.validsep)
-    
+        self.levelsRe = re.compile(r'^level=(.*)$')
+        self.colorsRe = re.compile(r'^color\.(.*)=(.*)$')
+
     def parse_properties(self):
         # is that a huge config file?
         try:
@@ -44,6 +48,20 @@ class Property(object):
         # Generator expression, so does not matter if huge or not actually.
         lines = (k.rstrip() for k in fd if not self.blankpat.search(k))
         for i in lines:
+            search = self.levelsRe.search(i)
+            if search:
+               self.levels.append(search.group(1).lower())
+               continue
+            search = self.colorsRe.search(i)
+            if search:
+                level = search.group(1).lower()
+                if not level in self.levels:
+                    self.levels.append(level)
+                    print "Level " + level + " was automagically added to recognized level as a color was defined !"
+
+                self.colors[level] = search.group(2).lower()
+                continue
+
             vals = re.split(self.resep,i)
             # we make it case insensitive.
             key = vals[0].strip().lower()
@@ -62,6 +80,17 @@ class Property(object):
     
     def get_keys(self):
         return self.keys
+
+    def get_levels(self):
+        return self.levels
+
+    def get_color(self, level):
+        if level in self.colors.keys():
+           return self.colors[level]
+        return None
+
+    def get_color_items(self):
+        return self.colors.items()
 
     def is_key(self,key):
         if key in self.dictproperties:

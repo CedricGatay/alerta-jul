@@ -22,40 +22,35 @@ from log4tailer import LogLevels
 class LogColors(object):
     '''Provides the colors that will
     be used when printing Log4J levels'''
-
     def __init__(self):
         self.color = TermColorCodes()
         # defaults
         # color instance has dinamically assigned attributes 
         # so pylint complaints.
         # pylint: disable-msg=E1101
-        self.warning = self.color.yellow
-        self.warn = self.color.yellow
-        self.error = self.color.magenta
-        self.info = self.color.green
-        self.fine = self.color.green
-        self.finer = self.color.green
-        self.debug = self.color.black
-        self.config = self.color.black
-        self.finest = self.color.black
-        self.fatal = self.color.red
-        self.severe = self.color.red
-        self.critical = self.color.red
+        self.colors = {"warning" : self.color.yellow, "warn" : self.color.yellow,
+                       "error" : self.color.magenta, "info" : self.color.yellow,
+                        "fine" : self.color.green, "finer" : self.color.green,
+                        "debug" : self.color.black, "config" :self.color.black,
+                        "finest" : self.color.black, "fatal" : self.color.red,
+                        "severe":self.color.red, "critical": self.color.red}
         self.reset = self.color.reset
         self.backgroundemph = self.color.backgroundemph
 
     def parse_config(self, properties):
-        for key in properties.get_keys():
-            code = self.color.getCode(properties.get_value(key))
+        for (level, color) in properties.get_color_items():
+            code = self.color.getCode(color)
             if not code:
                 continue
-            setattr(self, key, code)
-            
+            self.colors[level] = code
+
     def getLogColor(self, color):
         return self.color.getCode(color)
     
     def getLevelColor(self, level):
         level = level.lower()
-        if level in LogLevels.logLevels:
-            return getattr(self, level)
+        color = self.color.white
+        if  level in self.colors.keys():
+            color = self.colors[level]
+        return color
 

@@ -1,12 +1,12 @@
 import os
 import sys
-from log4tailer import LogTailer, LogColors, Log, Properties
+from log4tailer import LogTailer, LogColors, Log, Properties, LogLevels
 from log4tailer import notifications
 from log4tailer.utils import setup_mail
 import re
 import logging
 
-__version__ = "3.0.2-JUL"
+__version__ = "3.0.3-JUL"
 logging.basicConfig(level = logging.WARNING)
 logger = logging.getLogger('log4tail')
 
@@ -17,6 +17,7 @@ defaults  = {'pause' : 1,
     'nlines' : False,
     'target': None, 
     'logcolors' : LogColors.LogColors(),
+    'loglevels' : LogLevels.LogLevels(),
     'properties' : None,
     'alt_config': os.path.expanduser('~/.log4tailer'),
     'post' : False}
@@ -27,6 +28,7 @@ def parse_config(configfile):
     return properties
 
 def initialize(options):
+    loglevels = defaults['loglevels']
     logcolors = defaults['logcolors']
     actions = defaults['actions']
     config = options.configfile or defaults['alt_config']
@@ -36,6 +38,7 @@ def initialize(options):
     if os.path.exists(config):
         logger.info("Configuration file [%s] found" % config)
         defaults['properties'] = parse_config(config)
+        loglevels.parse_config(defaults['properties'])
         logcolors.parse_config(defaults['properties'])
     properties = defaults['properties']
     if options.pause:

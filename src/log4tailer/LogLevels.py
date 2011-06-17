@@ -16,13 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Log4Tailer.  If not, see <http://www.gnu.org/licenses/>.
 
-logLevels = ['finest', 'finer', 'fine', 'config','severe','debug',
-             'info',
-             'warn',
-             'warning',
-             'error',
-             'fatal',
-             'critical']
+
+class LogLevels(object):
+    def __init__(self):
+        self.logLevels = ['finest', 'finer', 'fine', 'config','severe','debug',
+             'info','warn','warning','error','fatal','critical']
+
+    def parse_config(self, properties):
+        levels = properties.get_levels()
+        levels.extend(self.logLevels)
+        self.logLevels = levels
 
 
 

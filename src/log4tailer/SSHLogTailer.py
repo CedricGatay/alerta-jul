@@ -6,7 +6,7 @@ import time
 import select
 from log4tailer.Log import Log
 from log4tailer.Message import Message
-from log4tailer.TermColorCodes import TermColorCodes
+from log4tailer.TermColorCodes import TermColorCodes, COLORS, COLOR_GREEN
 from subprocess import Popen, PIPE
 import notifications
 
@@ -136,7 +136,7 @@ class SSHLogTailer(object):
         lenhost = len(hostname)
         fancyWidth = (int(numCols)-lenhost-2)/2
         fancyheader = '*' * fancyWidth
-        hostnameHeader = (self.color.green +  # pylint: disable-msg=E1101
+        hostnameHeader = (COLORS[COLOR_GREEN] +  # pylint: disable-msg=E1101
                 fancyheader + ' ' + 
                 hostname + ' ' + 
                 fancyheader + 

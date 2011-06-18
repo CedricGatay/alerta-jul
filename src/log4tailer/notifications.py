@@ -63,8 +63,7 @@ class Print(object):
             time.sleep(pause)
 
     def printInit(self, message):
-        (pause,colormsg) = message.getColorizedMessage()
-        pause = 0
+        (dummy ,colormsg) = message.getColorizedMessage()
         if colormsg:
             print colormsg
 

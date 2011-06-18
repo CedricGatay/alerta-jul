@@ -16,25 +16,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Log4Tailer.  If not, see <http://www.gnu.org/licenses/>.
 
-from log4tailer.TermColorCodes import TermColorCodes
-from log4tailer import LogLevels
+from log4tailer.TermColorCodes import TermColorCodes, COLOR_YELLOW, COLOR_MAGENTA, COLOR_GREEN, COLOR_BLACK, COLOR_RED, RESET, COLOR_WHITE, COLORS
 
 class LogColors(object):
     '''Provides the colors that will
     be used when printing Log4J levels'''
+
     def __init__(self):
         self.color = TermColorCodes()
         # defaults
         # color instance has dinamically assigned attributes 
         # so pylint complaints.
         # pylint: disable-msg=E1101
-        self.colors = {"warning" : self.color.yellow, "warn" : self.color.yellow,
-                       "error" : self.color.magenta, "info" : self.color.yellow,
-                        "fine" : self.color.green, "finer" : self.color.green,
-                        "debug" : self.color.black, "config" :self.color.black,
-                        "finest" : self.color.black, "fatal" : self.color.red,
-                        "severe":self.color.red, "critical": self.color.red}
-        self.reset = self.color.reset
+        self.colors = {"warning": COLORS[COLOR_YELLOW], "warn": COLORS[COLOR_YELLOW],
+                       "error": COLORS[COLOR_MAGENTA], "info": COLORS[COLOR_YELLOW],
+                       "fine": COLORS[COLOR_GREEN], "finer": COLORS[COLOR_GREEN],
+                       "debug": COLORS[COLOR_BLACK], "config": COLORS[COLOR_BLACK],
+                       "finest": COLORS[COLOR_BLACK], "fatal": COLORS[COLOR_RED],
+                       "severe": COLORS[COLOR_RED], "critical": COLORS[COLOR_RED]}
+        self.reset = RESET
         self.backgroundemph = self.color.backgroundemph
 
     def parse_config(self, properties):
@@ -46,10 +46,10 @@ class LogColors(object):
 
     def getLogColor(self, color):
         return self.color.getCode(color)
-    
+
     def getLevelColor(self, level):
         level = level.lower()
-        color = self.color.white
+        color = COLORS[COLOR_WHITE]
         if  level in self.colors.keys():
             color = self.colors[level]
         return color

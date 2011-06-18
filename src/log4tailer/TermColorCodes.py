@@ -20,57 +20,47 @@
 # some code taken from termcolor GPL module in pypi by 
 # Konstantin Lepa <konstantin.lepa@gmail.com>
 
-COLORS = dict(
-        zip([
-            'black',
-            'red',
-            'green',
-            'yellow',
-            'blue',
-            'magenta',
-            'cyan',
-            'white',
-            ],
-            range(30, 38)
-            )
-        )
 
-HIGHLIGHTS = dict(
-        zip([
-            'on_black',
-            'on_red',
-            'on_green',
-            'on_yellow',
-            'on_blue',
-            'on_magenta',
-            'on_cyan',
-            'on_white'
-            ],
-            range(40, 48)
-            )
-        )
-
-SUFFIX_CODE ='\033[%dm'
+COLOR_WHITE = 'white'
+COLOR_CYAN = 'cyan'
+COLOR_MAGENTA = 'magenta'
+COLOR_BLUE = 'blue'
+COLOR_YELLOW = 'yellow'
+COLOR_GREEN = 'green'
+COLOR_RED = 'red'
+COLOR_BLACK = 'black'
+SUFFIX_CODE = '\033[%dm'
 RESET = '\033[0m'
 SKIP = "skip"
+
+AVAILABLE_COLORS = [COLOR_BLACK, COLOR_RED, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_MAGENTA, COLOR_CYAN,
+                    COLOR_WHITE]
+AVAILABLE_BG_COLORS = ['on_' + c for c in AVAILABLE_COLORS]
+
+COLORS = dict(zip(AVAILABLE_COLORS, [SUFFIX_CODE % r for r in range(30, 38)]))
+
+HIGHLIGHTS = dict(
+    zip(AVAILABLE_BG_COLORS,
+        [SUFFIX_CODE % r for r in range(40, 48)]
+    )
+)
 
 class TermColorCodes:
     '''Defines the ANSI Terminal
     color codes'''
+
     def __init__(self):
-        for k in COLORS:
-            setattr(self, k, SUFFIX_CODE % COLORS[k])
-        self.backgroundemph = SUFFIX_CODE % HIGHLIGHTS['on_red']
-        self.onyellowemph = SUFFIX_CODE % HIGHLIGHTS['on_yellow']
-        self.oncyanemph = SUFFIX_CODE % HIGHLIGHTS['on_cyan']
+        self.backgroundemph = HIGHLIGHTS['on_red']
+        self.onyellowemph = HIGHLIGHTS['on_yellow']
+        self.oncyanemph = HIGHLIGHTS['on_cyan']
         self.reset = RESET
 
     def buildCode(self, color):
         code = ''
         if color in COLORS:
-            code = SUFFIX_CODE % COLORS[color]
+            code = COLORS[color]
         if color in HIGHLIGHTS:
-            code += SUFFIX_CODE % HIGHLIGHTS[color]
+            code += HIGHLIGHTS[color]
         return code
 
     def getCode(self, color):
@@ -78,6 +68,6 @@ class TermColorCodes:
         provided the ascii color word'''
         if color == SKIP:
             return SKIP
-        color = [ k.strip() for k in color.split(',') ]
+        color = [k.strip() for k in color.split(',')]
         return ''.join(map(self.buildCode, color))
 

@@ -3,13 +3,37 @@
 # log4tail -c config yourlogs
 
 # ====================================================
-# Custom colours for every level. Available 
-# colours are: red, green, yellow, blue, magenta, cyan 
-# and white. Uncomment to override the default ones.
+# Custom colors and levels
+# Available colors are :
+# * white
+# * cyan
+# * magenta
+# * blue
+# * yellow
+# * green
+# * red
+# * black
+# Background colors are the same prefixed by 'on_'
+# Format is
+# color.LEVEL=${color}
+# Skip lines
+# If you specify the 'skip' color
+# matchin lines will automagically be removed from output
+# ====================================================
+# color.warn=green, on_yellow
+# color.debug=skip
+
+
+# ====================================================
+# Custom colours for standard levels.
+# Available levels are :
+# finest, finer, fine, config,severe,debug,
+#             info,warn,warning,error,fatal,critical
+# Uncomment to override the default ones.
 # ====================================================
 
 # warn = yellow, on_cyan
-# error = magenta 
+# error = magenta
 # fatal = red, on_green
 # info = green
 # debug = black

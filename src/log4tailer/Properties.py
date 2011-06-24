@@ -34,7 +34,7 @@ class Property(object):
         self.blankpat = re.compile(r'^(\s+|#.*|\/\/.*)$')
         self.validsep = ["="]
         self.resep = "|".join(self.validsep)
-        self.colorsRe = re.compile(r'^color\.(.*)=(.*)$')
+        self.colorsRe = re.compile(r'^color\.(.*)\s?=\s?(.*)$')
 
     def parse_properties(self):
         # is that a huge config file?

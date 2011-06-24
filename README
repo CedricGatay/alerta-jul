@@ -1,20 +1,22 @@
-# Log4Tailer: A multicolored python tailer for log4J logs
+# Alerta-JUL: A multicolored python tailer for logs
+# Copyright (C) 2011 Cedric Gatay
+# Forked from
 # Copyright (C) 2008 Jordi Carrillo Bosch
 
-# This file is part of Log4Tailer Project.
+# This file is part of Log4Tailer / Alerta-JUL Project.
 #
-# Log4Tailer is free software: you can redistribute it and/or modify
+# Alerta-JUL / Log4Tailer is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# Log4Tailer is distributed in the hope that it will be useful,
+# Alerta-JUL / Log4Tailer is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Log4Tailer.  If not, see <http://www.gnu.org/licenses/>.
+# along with Alerta-JUL / Log4Tailer.  If not, see <http://www.gnu.org/licenses/>.
 
 *********************************************
 Basic functionality
@@ -26,9 +28,9 @@ http://code.google.com/p/log4tailer/
 
 Installation:
 
-Untar, cd bin and run :-)
+Get the tar, Untar, cd bin and run :-)
 
-If you want system wide:
+If you want system wide (make sure to have python setuptools installed and system wide rights):
 
 python setup.py install
 
@@ -77,11 +79,31 @@ fatal = red
 
 The above are the defaults and work well with a white or clear terminal background.
 
-Other options, please refer to the wiki in the project webpage.
+You can add specific logging levels by using the following syntax
+     color.${level} = ${color}
+ where ${level} is the level pattern you want to match (or any other pattern...) 
+ and ${color} is the color you want to use.
+
+Valid colors are, their background counterparts are prefixed with 'on_' : 
+ * white
+ * cyan
+ * magenta
+ * blue
+ * yellow
+ * green
+ * red
+ * black
+ * skip
+Levels with the skip color will not be printed out in your console 
+   (fast and easy way to disable an annoying message)
+
+Other options, please refer to :
+ * the wiki in the original project webpage 
+ * the log4tailconfig.txt file (heavily commented out)
 
 For more explanation, details and options take a look at the UserGuide
 provided.
 
 Enjoy
 
-Jordi
+Jordi & Cedric

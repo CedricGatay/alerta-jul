@@ -1,0 +1,8 @@
+*.pyc
+.DS_Store
+eggs
+ENV
+*.ipr
+*.iws
+*.iml
+dist/

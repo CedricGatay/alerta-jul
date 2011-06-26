@@ -30,6 +30,7 @@ class Log(object):
         self.path = path
         self.fh = None
         self.inode = None
+        self.curpos = None
         self.size = None
         self.loglevel = None
         self.properties = properties
@@ -77,28 +78,41 @@ class Log(object):
         try:
             fd = open(self.path,'r')
             self.fh = fd
+            self.curpos = fd.tell()
             return fd
         except IOError:
             print "Could not open file "+self.path
             raise IOError
     
     def readLine(self):
-        return self.fh.readline()
+        self.fh.seek(self.curpos, 0)
+        readline = self.fh.readline()
+        self.updateCurPos()
+        return readline
 
     def readLines(self):
-        return self.fh.readlines()
+        # seek to / update current position used (see #2)
+        self.fh.seek(self.curpos, 0)
+        readlines = self.fh.readlines()
+        self.updateCurPos()
+        return readlines
 
     def closeLog(self):
         self.fh.close()
+
+    def updateCurPos(self):
+        self.curpos = self.fh.tell()
 
     def seekLogEnd(self):
         # should be 2 for versions 
         # older than 2.5 SEEK_END = 2
         self.fh.seek(0,2)
+        self.updateCurPos()
     
     def seekLogNearlyEnd(self):
         currpos = self.__getLast10Lines()
         self.fh.seek(currpos,0)
+        self.updateCurPos()
     
     def __getLast10Lines(self):
         linesep = '\n'
